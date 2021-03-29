@@ -1,0 +1,105 @@
+body {
+  background: #555555;
+  color: #262424;
+  margin-top: 3.2rem;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #262424;
+}
+
+/* nav bar bg color */
+.bg-steel {
+  background-color: #5B8580;
+}
+
+/* nav bar text color */
+.site-header .navbar-nav .nav-link {
+  color: #262424;
+}
+
+.site-header .navbar-nav .nav-link:hover {
+  color: #262424;
+  font-weight: 900;
+}
+
+/* nav bar active */
+.site-header .navbar-nav .nav-link:active {
+  text-decoration: underline;
+}
+
+/* offers post by users  */
+.content-section {
+  background: #fefefe;
+  padding: 10px 20px;
+  border: 5px solid #EEF2F0;
+  border-radius: 3px;
+  margin-bottom: 20px;
+}
+
+.article-title {
+  color: #262424;
+}
+
+a.article-title:hover {
+  color: #5B8580;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+a.article-metadata:link {
+  color: #262424 !important;
+}
+
+.article-content {
+  white-space: pre-line;
+}
+
+.article-img {
+  height: 80px;
+  width: 80px;
+  margin-right: 15px;
+}
+
+
+.article-metadata {
+  color: #5B8580;
+  padding-bottom: 1px;
+  margin-bottom: 2px;
+  border-bottom: 2px solid #5B8580
+}
+
+a.article-metadata:hover {
+  color: #030033;
+  text-decoration: none;
+}
+
+.article-svg {
+  width: 25px;
+  height: 25px;
+  vertical-align: middle;
+}
+
+.account-img {
+  height: 125px;
+  width: 125px;
+  margin-right: 20px;
+  margin-bottom: 16px;
+}
+
+.account-heading {
+  font-size: 2.5rem;
+}
+
+/* map css
+ Always set the map height explicitly
+ to define the size of the div element
+ that contains the map. */
+/* Set the size of the div element that contains the map */
+#map {
+  height: 500px;
+  /* The height is 400 pixels */
+  width: 500px;
+  /* The width is the width of the web page */
+}
+
