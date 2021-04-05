@@ -78,9 +78,8 @@ class Post(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), nullable=False)
-    address = db.Column(db.String(150), nullable=False)
-    location = db.Column(
-        Geometry("POINT", srid=SpatialConstants.SRID, dimension=2, management=True))
+    #address = db.Column(db.String(150), nullable=False)
+    #location = db.Column(Geometry("POINT", srid=SpatialConstants.SRID, dimension=2, management=True))
     date_posted = db.Column(db.DateTime, nullable=False,
                             default=datetime.utcnow)
     content = db.Column(db.Text, nullable=False)

@@ -21,16 +21,16 @@ def new_post():
     '''available_groups=db.session.query(Groups).filter(Groups.userID == currend_user.userID).all()
     #Now forming the list of tuples, so it's ok for SelectField
     groups_list=[(i.groupID, i.groupName) for i in available_groups]
-    form=AddName()'''
+    form=AddName()
 
     form.offer_type.choices = [(i.id, i.name)
-                               for i in OfferType.query.all()]
+                               for i in OfferType.query.all()]'''
     if form.validate_on_submit():
         post = Post(title=form.title.data,
-                    content=form.content.data, author=current_user, address=form.address.data,
-                    location=Post.point_representation(
-                        form.lat.data, form.lng.data),
-                    offer_type_id=form.offer_type.data, user_id=user_id)
+                    content=form.content.data, author=current_user, #address=form.address.data,
+                    #location=Post.point_representation(
+                    #    form.lat.data, form.lng.data), user_id=user_id,
+                    offer_type_id=form.offer_type.data)
         db.session.add(post)
         db.session.commit()
         flash('Your offer has been successfully added!', 'success')
