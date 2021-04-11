@@ -11,6 +11,7 @@
 
     <!-- maps JS -->
     <script src="{{ url_for('static', filename='gmap.js') }}"></script>
+        <script src="{{ url_for('static', filename='autocomplete.js') }}"></script>
      <script src="https://unpkg.com/@google/markerclustererplus@4.0.1/dist/markerclustererplus.min.js"></script>
 
     {% if title %}
@@ -56,7 +57,7 @@
               <ul class="list-group">
                 <li class="list-group-item list-group-item-light" >Latest Offers</li>
                 <a class="list-group-item nav-link" href="{{ url_for('main.maps') }}">Map View</a>
-                <li class="list-group-item list-group-item-light">Calendars</li>
+                <a class="list-group-item nav-link" href="{{ url_for('posts.places') }}">Places</a>
                 <li class="list-group-item list-group-item-light">News</li>
               </ul>
             </p>
