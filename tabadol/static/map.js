@@ -1,5 +1,5 @@
-let map;
-let markers;
+let map, infoWindow, markers;
+
 // Initialize and add the map
       function initMap() {
         // The location of Berlin
@@ -102,6 +102,42 @@ let markers;
 
     }
 
+
+function showOffers(post) {
+  //to display information below after marker is selected
+  const card = document.querySelector(".offer-card");
+  card.toggleAttribute("hidden");
+  document.getElementById("title").textContent = post.title;
+  document.getElementById("userName").textContent = post.user_name;
+  document.getElementById("offerType").textContent = post.offer_type;
+  document.getElementById("address").textConent = post.address;
+  document.getElementById("content").textContent = post.content;
+  document.getElementById(
+    "view-offer"
+  ).href = `http://127.0.0.1:5000/post/${post.id}`;
+}
+
+function searchAddress(geocoder, resultsMap) {
+  const address = document.getElementById("address").value;
+  geocoder.geocode({ address: address }, (results, status) => {
+    if (status === "OK") {
+      resultsMap.setCenter(results[0].geometry.location);
+      resultsMap.setZoom(12);
+    } else {
+      alert("Geocode was not successful for the following reason: " + status);
+    }
+  });
+}
+
+function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+  infoWindow.setPosition(pos);
+  infoWindow.setContent(
+    browserHasGeolocation
+      ? "Error: The Geolocation service failed."
+      : "Error: Your browser doesn't support geolocation."
+  );
+  infoWindow.open(map);
+}
 
 
 // Initialize and add the map without marker
