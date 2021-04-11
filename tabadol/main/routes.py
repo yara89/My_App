@@ -34,4 +34,12 @@ def maps():
 
   # icons.dots.green:   [(, ), (, )]
   # icons.dots.blue: [(, , "Hello World")], add also...gmap=gmap
-  return render_template('maps.html',  title='Map of maps') #  local=local
+  return render_template('maps.html',  title='Map of maps')  # local=local
+
+
+'''
+@main.route("/places", methods=['GET', 'POST'])
+def places():
+
+  return render_template('places.html', form=form)
+'''
