@@ -27,8 +27,8 @@ def new_post():
                                for i in OfferType.query.all()]'''
     if form.validate_on_submit():
         post = Post(title=form.title.data,
-                    content=form.content.data, author=current_user, #address=form.address.data,
-                    #location=Post.point_representation(
+                    content=form.content.data, author=current_user,  addresses=form.addresses.data,
+                    # location=Post.point_representation(
                     #    form.lat.data, form.lng.data), user_id=user_id,
                     offer_type_id=form.offer_type.data)
         db.session.add(post)
@@ -54,9 +54,9 @@ def update_post(post_id):
     if form.validate_on_submit():
         post.title = form.title.data
         post.content = form.content.data
-        post.street_address = form.street_address.data
-        post.location = Post.point_representation(
-            form.lat.data, form.lng.data),
+        post.addresses = form.ddresses.data
+        # post.addresses = Post.point_representation(
+        #   form.lat.data, form.lng.data),
         db.session.add(post.location)
         db.session.commit()
         flash('The offer has been updated!', 'success')
@@ -64,7 +64,7 @@ def update_post(post_id):
     elif request.method == 'GET':
         form.title.data = post.title
         form.content.data = post.content
-        form.street_address.data = post.street_address
+        form.addresses.data = post.addresses
     return render_template('create_post.html', title='Update Post',
                            form=form, legend='Update Post', post=post)
 
@@ -99,3 +99,23 @@ def api_all():
     for item in posts:
         output.append(item.to_dict())
     return jsonify(output)
+
+
+@ posts.route("/places", methods=['GET', 'POST'])
+@login_required
+def places():
+    user = current_user.user_offers
+    for item in user:
+        user_id = item.id
+    form = PostForm()
+    if form.validate_on_submit():
+        post = Post(title=form.title.data,
+                    content=form.content.data, author=current_user,  addresses=form.addresses.data, user_id=user_id,
+                    # location=Post.point_representation(
+                    #    form.lat.data, form.lng.data), user_id=user_id,
+                    offer_type_id=form.offer_type.data)
+        db.session.add(post)
+        db.session.commit()
+        flash('Your offer has been successfully added!', 'success')
+        return redirect(url_for('main.home'))
+    return render_template('places.html', title='Autocomplete form', form=form,  user=user, map_key=current_app.config['GOOGLEMAPS_KEY'], legend='Autocomplete form')
