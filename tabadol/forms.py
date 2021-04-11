@@ -46,8 +46,8 @@ class UpdateAccountForm(FlaskForm):
                         validators=[DataRequired(), Email()])
     picture = FileField('Update Profile Picture', validators=[
                         FileAllowed(['jpg', 'png'])])
-    lng = HiddenField('lng')
-    lat = HiddenField('lat')
+    #lng = HiddenField('lng')
+    #lat = HiddenField('lat')
     submit = SubmitField('Update Profle')
 
     def validate_username(self, username):
@@ -65,13 +65,14 @@ class UpdateAccountForm(FlaskForm):
                     'this email address already has an account, sign up using a differnt email! ')
 
 
-'''class PostForm(FlaskForm):
+'''
+class PostForm(FlaskForm):
     title = StringField('Title', validators=[DataRequired()])
     content = TextAreaField('Content', validators=[DataRequired()])
-    location = TextAreaField('Local', validators=[DataRequired()])
-     offer_type = SelectField(u'Type of activity', choices=[
+    location = TextAreaField('Location', validators=[DataRequired()])
+    offer_type = SelectField(u'Type of activity', choices=[
         (1, "give", 2, "need")], validators=[DataRequired()])
-  description = TextAreaField(
+    description = TextAreaField(
         u"Let us know what you do, your skill level, your availability",
         validators=[DataRequired()],
     )
