@@ -58,7 +58,7 @@ def create_app(config_class=Config):
     app.register_blueprint(main)
     app.register_blueprint(errors)
 
-    # db.drop_all(app=app)
-    #db.create_all(app=app)
+    #db.drop_all(app=app)
+    db.create_all(app=app)
 
     return app
