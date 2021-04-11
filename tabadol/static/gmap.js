@@ -1,11 +1,9 @@
+let map, infoWindow, markers;
 
-
-let map;
-let marker;
 // Initialize and add the map
     function initMap() {
         // The location of Berlin
-    const berlin = { lat: 52.5200, lng: 13.4050};
+        const berlin = { lat: 52.5200, lng: 13.4050};
         // The map, centered at Berlin
          const map = new google.maps.Map(document.getElementById("map"), {
          zoom: 11,
@@ -17,7 +15,7 @@ let marker;
          mapTypeId: google.maps.MapTypeId.ROADMAP
         });
         // The marker, positioned at Berlin
-        const marker = new google.maps.Marker({
+        const markers = new google.maps.Marker({
           position: berlin,
           map: map,
         });
@@ -85,3 +83,39 @@ let marker;
         map.setOptions({ styles: mapStyles });
 
   }
+
+function showOffers(post) {
+  //when clicked i want to display information below
+  const card = document.querySelector(".offer-card");
+  card.toggleAttribute("hidden");
+  document.getElementById("title").textContent = post.title;
+  document.getElementById("userName").textContent = post.user_name;
+  document.getElementById("offerType").textContent = post.offer_type;
+  document.getElementById("address").textConent = post.address;
+  document.getElementById("content").textContent = post.content;
+  document.getElementById(
+    "view-offer"
+  ).href = `http://127.0.0.1:5000/post/${post.id}`;
+}
+
+function searchAddress(geocoder, resultsMap) {
+  const address = document.getElementById("address").value;
+  geocoder.geocode({ address: address }, (results, status) => {
+    if (status === "OK") {
+      resultsMap.setCenter(results[0].geometry.location);
+      resultsMap.setZoom(12);
+    } else {
+      alert("Geocode was not successful for the following reason: " + status);
+    }
+  });
+}
+
+function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+  infoWindow.setPosition(pos);
+  infoWindow.setContent(
+    browserHasGeolocation
+      ? "Error: The Geolocation service failed."
+      : "Error: Your browser doesn't support geolocation."
+  );
+  infoWindow.open(map);
+}
