@@ -41,6 +41,7 @@
                    {{ form.offer_type(class="form-control-label", placeholder="Type") }}
                    {% endif %}
                 </div>
+<<<<<<< HEAD
 
                <!-- <div class="form-group addresses pac-container" >
                     {{ form.addresses.label(class="form-control-label pac-input", placeholder="Enter a location") }}-->
@@ -48,6 +49,14 @@
                     <!--   <input id="pac-input" class="addresses" type="text" placeholder="Location" autocomplete="off" />
                     <div id="map"></div>
 
+=======
+                <div class="form-group addresses pac-container" >
+                    {{ form.addresses.label(class="form-control-label pac-input", type="text", placeholder="Enter a location") }}
+                    <!--        <div id="pac-container" class="addresses">-->
+                    <input id="pac-input" class="addresses" type="text" placeholder="Location" autocomplete="off" />
+                    <div id="map"></div>
+
+>>>>>>> origin/main
                     </div>
                 </div>
                    {% if form.addresses.errors %}
@@ -59,6 +68,7 @@
                   {% else %}
                     {{ form.addresses(class="form-control form-control-label",  placeholder="location") }}
                   {% endif %}
+<<<<<<< HEAD
                 </div> -->
 
                 <div class="form-group addresses pac-container" >
@@ -75,6 +85,9 @@
                     {% endif %}
                 </div>
                                                     <div id="map"></div>
+=======
+                </div>
+>>>>>>> origin/main
                 <div class="form-group content">
                     {{ form.content.label(class="form-control-label") }}
                     {% if form.content.errors %}
