@@ -2,6 +2,7 @@ let map, infoWindow, markers;
 
 // Initialize and add the map
     function initMap() {
+<<<<<<< HEAD
       // fetch URL variables:
       const fetchURLBase = "http://localhost:5000/";
       const username = document.getElementById("username").innerText;
@@ -22,6 +23,10 @@ let map, infoWindow, markers;
         // The location of user
         const userLocation = updatesAndLocation.location;
 
+=======
+        // The location of Berlin
+        const berlin = { lat: 52.5200, lng: 13.4050};
+>>>>>>> origin/main
         // The map, centered at Berlin
          const map = new google.maps.Map(document.getElementById("map"), {
          zoom: 11,
@@ -54,7 +59,11 @@ let map, infoWindow, markers;
         });
         // The marker, positioned at Berlin
         const markers = new google.maps.Marker({
+<<<<<<< HEAD
           position: place.location,
+=======
+          position: berlin,
+>>>>>>> origin/main
           map: map,
         });
 
