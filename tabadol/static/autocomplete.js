@@ -57,6 +57,10 @@ function initMap() {
     infowindow.open(map, marker);
   });
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/main
   // Sets a listener on a radio button to change the filter type on Places
   // Autocomplete.
   function setupClickListener(id, types) {
