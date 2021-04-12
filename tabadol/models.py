@@ -78,13 +78,8 @@ class Post(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), nullable=False)
-<<<<<<< HEAD
     addresses = db.Column(db.String(150), nullable=False)
     offer_location = db.Column(
-=======
-    #address = db.Column(db.String(150), nullable=False)
-    addresses = db.Column(
->>>>>>> origin/main
         Geometry("POINT", srid=SpatialConstants.SRID, dimension=2, management=True))
     date_posted = db.Column(db.DateTime, nullable=False,
                             default=datetime.utcnow)
@@ -108,7 +103,7 @@ class Post(db.Model):
     @staticmethod
     def point_representation(lat, lng):
         point = 'POINT(%s %s)' % (lat, lng)
-        wkb_element = WKTElement(point, srid=4326)
+        wkb_element = WKTElement(point, srid=SpatialConstants.SRID)
         return wkb_element
 
     def to_dict(self):
@@ -116,12 +111,12 @@ class Post(db.Model):
             'id': self.id,
             'user_name': self.user.username,
             'title': self.title,
-            'addresses': self.addresses,
+            'address': self.addresses,
             'location': {
                 'lat': self.get_offer_location_lat(),
                 'lng': self.get_offer_location_lng(),
             },
-            'content': self.content,
+            'description': self.content,
             'offer_type': self.offer_type.name
         }
 
@@ -130,22 +125,16 @@ class Post(db.Model):
         # Return all posts within a given radius (in meters)
         return Post.query.filter(
             func.PtDistWithin(
-                Post.location,
-                func.MakePoint(lat, lng, 4326),
+                Post.offer_location,
+                func.MakePoint(lng, lat, SpatialConstants.SRID),
                 radius)
-        ).all()
+        ).limit(100).all()  # TODO
 
 
 '''
-class Local(db.Model):
-    __tablename__ = 'location'
-
-    id = db.Column(db.Integer, primary_key=True)
-    location = db.Column(db.String(200), nullable=False)
-    latitude = db.Column(db.Float, nullable=False)
-    longitude = db.Column(db.Float, nullable=False)
-    name = db.Column(db.String, nullable=False)
-
-    def __repr__(self):
-        return f"Local('{self.name}', '{self.latitude}' {self.longitude}')"
+    @staticmethod
+    def point_representation(latitude, longitude):
+        point = 'POINT(%s %s)' % (longitude, latitude)
+        wkb_element = WKTElement(point, srid=SpatialConstants.SRID)
+        return wkb_element
 '''
