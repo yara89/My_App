@@ -160,12 +160,17 @@ a.article-metadata:hover {
   margin-left: 12px;
   padding: 0 11px 0 13px;
   text-overflow: ellipsis;
+<<<<<<< HEAD
   width: 500px;
+=======
+  width: 400px;
+>>>>>>> origin/main
 }
 
 .pac-input:focus {
   border-color: #4d90fe;
 }
+<<<<<<< HEAD
 #pac-input {
   background-color: #fff;
   font-family: Roboto;
@@ -179,6 +184,8 @@ a.article-metadata:hover {
 #pac-input:focus {
   border-color: #4d90fe;
 }
+=======
+>>>>>>> origin/main
 
 #titleAuto {
   color: #fff;
@@ -187,8 +194,11 @@ a.article-metadata:hover {
   font-weight: 500;
   padding: 6px 12px;
 }
+<<<<<<< HEAD
 
 #button {
   align-items: right;
   padding: 6px 12px;
 }
+=======
+>>>>>>> origin/main
