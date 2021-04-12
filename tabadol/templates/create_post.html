@@ -41,10 +41,11 @@
                    {{ form.offer_type(class="form-control-label", placeholder="Type") }}
                    {% endif %}
                 </div>
-                <div class="form-group addresses pac-container" >
-                    {{ form.addresses.label(class="form-control-label pac-input", type="text", placeholder="Enter a location") }}
+
+               <!-- <div class="form-group addresses pac-container" >
+                    {{ form.addresses.label(class="form-control-label pac-input", placeholder="Enter a location") }}-->
                     <!--        <div id="pac-container" class="addresses">-->
-                    <input id="pac-input" class="addresses" type="text" placeholder="Location" autocomplete="off" />
+                    <!--   <input id="pac-input" class="addresses" type="text" placeholder="Location" autocomplete="off" />
                     <div id="map"></div>
 
                     </div>
@@ -58,7 +59,22 @@
                   {% else %}
                     {{ form.addresses(class="form-control form-control-label",  placeholder="location") }}
                   {% endif %}
+                </div> -->
+
+                <div class="form-group addresses pac-container" >
+                    {{ form.addresses.label(class="form-control-label pac-input search_address", placeholder="Enter a location") }}
+                    {% if form.addresses.errors %}
+                        {{ form.addresses(class="form-control form-control-lg is-invalid", id="pac-input") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.addresses.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.addresses(class="form-control form-control-lg is-invalid", id="pac-input") }}
+                    {% endif %}
                 </div>
+                                                    <div id="map"></div>
                 <div class="form-group content">
                     {{ form.content.label(class="form-control-label") }}
                     {% if form.content.errors %}

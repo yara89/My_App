@@ -8,7 +8,8 @@ class Config:
 
     # api key from Google API Console (https://console.cloud.google.com/apis/)
     GOOGLEMAPS_KEY = os.environ.get('API_KEY')
-
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
+    SQLALCHEMY_ECHO = True
     # Mail
     MAIL_SERVER = 'smtp.googlemail.com'
     MAIL_PORT = 587

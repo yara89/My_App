@@ -78,8 +78,8 @@ class Post(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), nullable=False)
-    #address = db.Column(db.String(150), nullable=False)
-    addresses = db.Column(
+    addresses = db.Column(db.String(150), nullable=False)
+    offer_location = db.Column(
         Geometry("POINT", srid=SpatialConstants.SRID, dimension=2, management=True))
     date_posted = db.Column(db.DateTime, nullable=False,
                             default=datetime.utcnow)
@@ -111,7 +111,7 @@ class Post(db.Model):
             'id': self.id,
             'user_name': self.user.username,
             'title': self.title,
-            'address': self.address,
+            'addresses': self.addresses,
             'location': {
                 'lat': self.get_offer_location_lat(),
                 'lng': self.get_offer_location_lng(),

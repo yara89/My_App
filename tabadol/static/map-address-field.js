@@ -1,56 +1,49 @@
-console.log('adresses field ')
+let addressAutocomplete;
+let input;
 
-let placeSearch, autocomplete;
+// event handler
+const onPlaceChanged = () => {
+  let place = addressAutocomplete.getPlace();
+  console.log('place', place);
+  console.log('geometry', place.geometry);
+  console.log('address_components', place.address_components);
+  console.log('name', place.name);
 
+  if (!place.geometry) {
+    input.placeholder = "Enter your address!!!";
+  } else {
+    document.getElementById("lat").value = place.geometry.location.lat();
+    document.getElementById("lng").value = place.geometry.location.lng();
+    input.value = place.name;
+  }
+}
 
 function initAutocomplete() {
-    console.log('autocomplete')
-  // Create the autocomplete object, restricting the search to geographical
-  // location types.
-  autocomplete = new google.maps.places.Autocomplete(
-    /** @type {!HTMLInputElement} */(document.getElementById('autocomplete')),
-    {types: ['geocode']});
-
-  // When the user selects an address from the dropdown, populate the address
-  // fields in the form.
-  autocomplete.addListener('place_changed', onPlaceChanged);
-}
-
-function onPlaceChanged() {
-  let place = autocomplete.getPlace();
-  console.log(place)
-  console.log(place.formatted_address)
-  console.log(place.geometry.location.lat())
-  console.log(place.geometry.location.lng())
-
-  if(!place.geometry) {
-    //User did not select a predicition; reset the input field
-    document.getElementById('autocomplete').placeholder = 'Enter your address';
-  } else {
-    //Display detials about the valid place
-    document.getElementById('details').innerHTML = place.formatted_address;
-    document.getElementById('lat').value = place.geometry.location.lat();
-    document.getElementById('lng').value = place.geometry.location.lng();
-    document.getElementById('address').value = place.formatted_address;
-
+  console.log(' autocomplete');
+  // center at Alexanderplatz, Berlin
+  const centerPos = { lat: 52.52, lng: 13.41 };
+  // bounds at 100km from center in all directions
+  const defaultBounds = {
+    north: centerPos.lat + 1,
+    south: centerPos.lat - 1,
+    east: centerPos.lng + 1,
+    west: centerPos.lng - 1,
+  };
+  // query restrictions
+  const options = {
+    bounds: defaultBounds,
+    componentRestrictions: {country: "de"},
+    fields: ["address_components", "geometry", "name"],
+    strictBounds: true,
+    origin: centerPos
   }
-}
-// Bias the autocomplete object to the user's geographical location,
-// as supplied by the browser's 'navigator.geolocation' object.
-function geolocate() {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(function(position) {
-      var geolocation = {
-        lat: position.coords.latitude,
-        lng: position.coords.longitude
-      };
-      var circle = new google.maps.Circle({
-        center: geolocation,
-        radius: position.coords.accuracy
-      });
-      autocomplete.setBounds(circle.getBounds());
-    });
-  }
+
+  // the HTML input element
+  input = document.getElementById("addresses");
+
+  addressAutocomplete = new google.maps.places.Autocomplete(input, options);
+
+  // 'on input change' event listener
+  addressAutocomplete.addListener("place_changed", onPlaceChanged);
 }
 
-google.maps.event.addDomListener(window, 'load', initAutocomplete);

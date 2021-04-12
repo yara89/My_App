@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 {% block content %}
     <div class="content-section">
-        <form method="POST" action="" autocomplete= "off">
+        <form method="POST" action="" autocomplete= "off" onsubmit="return searchAddressSubmit()">
             {{ form.hidden_tag() }}
             <fieldset class="form-group">
                {% for field, errors in form.errors.items() %}
@@ -23,6 +23,23 @@
                         {{ form.title(class="form-control form-control-lg") }}
                     {% endif %}
                 </div>
+                <div class="form-group addresses pac-container" >
+                    {{ form.addresses.label(class="form-control-label pac-input search_address", placeholder="Enter a location") }}
+                    {% if form.addresses.errors %}
+                        {{ form.addresses(class="form-control form-control-lg is-invalid", id="pac-input") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.addresses.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.addresses(class="form-control form-control-lg", id="pac-input") }} </br>
+                    {% endif %}
+                         <small id="addressHelpBlock" class="form-text">
+                          Enter for example: 'Skalitzerstrasse 52, Berlin' or 'Mitte, Berlin' or 'Stuttgart'
+                        </small> </br>
+                     <div id="map"></div> </br>
+                </div></br>
                 <div class="form-group offer-type">
                     {{ form.offer_type.label() }}
 
@@ -37,6 +54,7 @@
                    {{ form.offer_type(class="form-control-label", placeholder="Type") }}
                    {% endif %}
                 </div>
+
                 <div class="form-group content">
                     {{ form.content.label(class="form-control-label") }}
                     {% if form.content.errors %}
@@ -50,25 +68,35 @@
                         {{ form.content(class="form-control form-control-lg") }}
                     {% endif %}
                 </div>
-                <div class="form-group addresses">
-                  <!--   {{ form.addresses.label(class="form-control-label", type="text", placeholder="Enter a location") }} -->
-                    <div id="pac-container" class="addresses">
-                    <input id="pac-input" class="addresses" type="text" placeholder="Enter a location"  />
-                    </div>
-                </div>
-                    <div id="map"></div>
+
+
+                </br>
             </fieldset>
-            <div class="form-group">
-                {{ form.submit(class="btn btn-secondary") }}
-            </div>
 
         </form>
+         <div class="form-group">
+                {{ form.submit(class="btn btn-secondary", id="button") }}
+            </div>
     </div>
-
-
     <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
     <script
       src="https://maps.googleapis.com/maps/api/js?key={{GOOGLEMAPS_KEY}}&callback=initMap&libraries=places&v=weekly"
       async
     ></script>
 {% endblock content %}
+
+                 <!--
+                <div class="form-group addresses">
+                     {{ form.addresses.label(class="form-control-label", type="text", placeholder="Enter a location") }}
+                    <div id="pac-container" class="addresses">
+                    <input id="pac-input" class="addresses" type="text" placeholder="Enter a location"  />
+                    </div>
+                </div> -->
+                 <!--<label for="search_address">Search offers nearby:</label>
+                <div class="row pb-md-3">
+                    <div class="form-group col-md-11" style="margin-bottom: 0;">
+                    <input type="text" name="search_address" id="search_address" class="form-control">
+                    </div>
+                    <div class="form-group col-md-1" style="margin-bottom: 0;"> -->
+                  <!--      <button type="submit" class="btn btn-primary mb-2">Search</button> -->
+

@@ -2,8 +2,26 @@ let map, infoWindow, markers;
 
 // Initialize and add the map
     function initMap() {
-        // The location of Berlin
+      // fetch URL variables:
+      const fetchURLBase = "http://localhost:5000/";
+      const username = document.getElementById("username").innerText;
+      const updates = document.getElementById("updates").innerText;
+
+      const getUpdatesFunction = async () => {
+
+        const URL = `${fetchURLBase}api/${username}/updates/requests`;
+        console.log(URL);
+        try {
+
+       const response = await fetch(URL, { mode: "cors" });
+      // console.log(response.headers.values());
+       const updatesAndLocation = await response.json();
+       console.log(updatesAndLocation);
+        // The location of somewhere in Berlin
         const berlin = { lat: 52.5200, lng: 13.4050};
+        // The location of user
+        const userLocation = updatesAndLocation.location;
+
         // The map, centered at Berlin
          const map = new google.maps.Map(document.getElementById("map"), {
          zoom: 11,
@@ -14,11 +32,45 @@ let map, infoWindow, markers;
          mapTypeControl: false,
          mapTypeId: google.maps.MapTypeId.ROADMAP
         });
+
+      // get each update and make a marker out of it!
+      updatesAndLocation.data.map(update => {
+        createMarker(update)
+      })
+
+      function createMarker(place) {
+        console.log(place);
+        lat = place.location.lat;
+        lng = place.location.lng;
+
+        const contentString = "<div>" +
+        "<strong>" + place.title + "</strong><br>" +
+        "<span>Latitude: " + lat + "</span><br>" +
+        "<span>Longitude: " + lng + "</span>" +
+        "</div>";
+
+        const infowindow = new google.maps.InfoWindow({
+          content: contentString
+        });
         // The marker, positioned at Berlin
         const markers = new google.maps.Marker({
-          position: berlin,
+          position: place.location,
           map: map,
         });
+
+        marker.addListener("click", () => {
+          infowindow.open(map, marker);
+        })
+      }
+
+    } catch(err) {
+      console.log(err);
+    }
+  }
+
+
+  getUpdatesFunction();
+}
 
         var mapStyles = [
           {

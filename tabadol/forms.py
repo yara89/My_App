@@ -65,22 +65,6 @@ class UpdateAccountForm(FlaskForm):
                     'this email address already has an account, sign up using a differnt email! ')
 
 
-'''
-class PostForm(FlaskForm):
-    title = StringField('Title', validators=[DataRequired()])
-    content = TextAreaField('Content', validators=[DataRequired()])
-    location = TextAreaField('Location', validators=[DataRequired()])
-    offer_type = SelectField(u'Type of activity', choices=[
-        (1, "give", 2, "need")], validators=[DataRequired()])
-    description = TextAreaField(
-        u"Let us know what you do, your skill level, your availability",
-        validators=[DataRequired()],
-    )
-
-    submit = SubmitField('Post')
-'''
-
-
 class RequestResetForm(FlaskForm):
     email = StringField('Email',
                         validators=[DataRequired(), Email()])
