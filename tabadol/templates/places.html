@@ -1,7 +1,11 @@
 {% extends "layout.html" %}
 {% block content %}
     <div class="content-section">
+<<<<<<< HEAD
         <form method="POST" action="" autocomplete= "off" onsubmit="return searchAddressSubmit()">
+=======
+        <form method="POST" action="" autocomplete= "off">
+>>>>>>> origin/main
             {{ form.hidden_tag() }}
             <fieldset class="form-group">
                {% for field, errors in form.errors.items() %}
@@ -28,15 +32,24 @@
 
                     {% if form.offer_type.errors %}
                     {{ form.offer_type(class="form-control-label is-invalid", placeholder="Type") }}
+<<<<<<< HEAD
                     <div class="invalid-feedback">
                         {% for error in form.offer_type.errors %}
                         <span>{{ error }}</span>
                         {% endfor %}
                     </div>
+=======
+                <div class="invalid-feedback">
+                    {% for error in form.offer_type.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+>>>>>>> origin/main
                    {% else %}
                    {{ form.offer_type(class="form-control-label", placeholder="Type") }}
                    {% endif %}
                 </div>
+<<<<<<< HEAD
                 <div class="form-group addresses pac-container" >
                     {{ form.addresses.label(class="form-control-label pac-input search_address", placeholder="Enter a location") }}
                     {% if form.addresses.errors %}
@@ -55,6 +68,8 @@
                      </br>
                 </div></br> <div id="map"></div>
 
+=======
+>>>>>>> origin/main
                 <div class="form-group content">
                     {{ form.content.label(class="form-control-label") }}
                     {% if form.content.errors %}
@@ -68,6 +83,7 @@
                         {{ form.content(class="form-control form-control-lg") }}
                     {% endif %}
                 </div>
+<<<<<<< HEAD
 
 
                 </br>
@@ -79,12 +95,31 @@
 
     </div>
 
+=======
+                <div class="form-group addresses">
+                  <!--   {{ form.addresses.label(class="form-control-label", type="text", placeholder="Enter a location") }} -->
+                    <div id="pac-container" class="addresses">
+                    <input id="pac-input" class="addresses" type="text" placeholder="Enter a location"  />
+                    </div>
+                </div>
+                    <div id="map"></div>
+            </fieldset>
+            <div class="form-group">
+                {{ form.submit(class="btn btn-secondary") }}
+            </div>
+
+        </form>
+    </div>
+
+
+>>>>>>> origin/main
     <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
     <script
       src="https://maps.googleapis.com/maps/api/js?key={{GOOGLEMAPS_KEY}}&callback=initMap&libraries=places&v=weekly"
       async
     ></script>
 {% endblock content %}
+<<<<<<< HEAD
 
                  <!--
                 <div class="form-group addresses">
@@ -101,3 +136,5 @@
                     <div class="form-group col-md-1" style="margin-bottom: 0;"> -->
                   <!--      <button type="submit" class="btn btn-primary mb-2">Search</button> -->
 
+=======
+>>>>>>> origin/main
