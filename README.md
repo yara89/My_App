@@ -25,6 +25,7 @@ export YOURAPPLICATION_SETTINGS=......
 
 pip install -r requirements.txt
 
+
 ```
 
 3. Run the Flask app:
@@ -32,4 +33,4 @@ pip install -r requirements.txt
 ```
 python run.py
 ```
- 
+
